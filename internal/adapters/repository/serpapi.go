@@ -1,12 +1,12 @@
-
 package repository
 
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
+
 	"price-comparator-api/internal/core/domain"
 )
 
@@ -34,7 +34,7 @@ func (r *SerpAPIRepository) FindPrices(productName string) ([]domain.ProductPric
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read response body: %w", err)
 	}
