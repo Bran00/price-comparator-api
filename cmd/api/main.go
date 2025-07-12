@@ -1,19 +1,31 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
-	"price-comparator-api/internal/adapters/handler"
-	"price-comparator-api/internal/adapters/repository"
-	"price-comparator-api/internal/core/service"
+
+	"price-comparator-api/internal/domain"
+	"price-comparator-api/internal/ports"
+	"price-comparator-api/internal/service"
+	"price-comparator-api/pkg/adapters/handler"
+	"price-comparator-api/pkg/adapters/repository"
+	"price-comparator-api/pkg/adapters/routes"
+
+	"go.uber.org/fx"
 )
 
 func main() {
-	repo := repository.NewSerpAPIRepository()
-	priceComparatorService := service.NewPriceComparator(repo)
-	httpHandler := handler.NewHTTPHandler(priceComparatorService)
-
-	http.HandleFunc("/compare", httpHandler.Compare)
-	fmt.Println("Server is running on port 8080")
-	http.ListenAndServe(":8080", nil)
+	fx.New(
+		fx.Provide(
+			repository.NewSerpAPIRepository,
+			service.NewPriceComparator,
+			handler.NewHTTPHandler,
+			routes.NewMux,
+		),
+		fx.Invoke(func(mux *http.ServeMux) {
+			fmt.Println("Server is running on port 8080")
+			http.ListenAndServe(":8080", mux)
+		}),
+	).Run()
 }

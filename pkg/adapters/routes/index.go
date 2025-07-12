@@ -1,12 +1,13 @@
 package routes
 
 import (
-	"fmt"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"price-comparator-api/pkg/adapters/handler"
 )
 
-func RegisterRoutes(router *gin.Engine) {
-	userGroup := router.Group("compare")
-	userGroup.GET("/", fmt.Println("Hola"))
+func NewMux(h *handler.HTTPHandler) *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/compare", h.Compare)
+	return mux
 }
