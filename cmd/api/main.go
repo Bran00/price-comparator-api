@@ -8,9 +8,9 @@ import (
 	"price-comparator-api/internal/domain"
 	"price-comparator-api/internal/ports"
 	"price-comparator-api/internal/service"
-	"price-comparator-api/pkg/adapters/handler"
-	"price-comparator-api/pkg/adapters/repository"
-	"price-comparator-api/pkg/adapters/routes"
+	"price-comparator-api/adapters/handler"
+	"price-comparator-api/adapters/repository"
+	"price-comparator-api/adapters/routes"
 
 	"go.uber.org/fx"
 )

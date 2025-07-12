@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"price-comparator-api/internal/core/domain"
+	"price-comparator-api/internal/domain"
 )
 
 type SerpAPIRepository struct{}

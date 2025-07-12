@@ -2,8 +2,8 @@
 package service
 
 import (
-	"price-comparator-api/internal/core/domain"
-	"price-comparator-api/internal/core/ports"
+	"price-comparator-api/internal/domain"
+	"price-comparator-api/internal/ports"
 )
 
 type PriceComparator struct {

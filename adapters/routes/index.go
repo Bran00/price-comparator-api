@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"price-comparator-api/pkg/adapters/handler"
+	"price-comparator-api/adapters/handler"
 )
 
 func NewMux(h *handler.HTTPHandler) *http.ServeMux {

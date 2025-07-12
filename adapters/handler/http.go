@@ -4,7 +4,7 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
-	"price-comparator-api/internal/core/ports"
+	"price-comparator-api/internal/ports"
 )
 
 type HTTPHandler struct {
