@@ -1,10 +1,10 @@
 package domain
 
 type ProductPrice struct {
-	Source      string `json:"source"`
-	Price       string `json:"price"`
-	Link        string `json:"link"`
-	Description string `json:"description"`
+	Source      string
+	Price       string
+	Link        string
+	Description string
 }
 
 type Product struct {

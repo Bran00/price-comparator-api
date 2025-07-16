@@ -1,10 +1,8 @@
-
 package ports
 
-type PriceRepository interface {
-	FindPrices(productName string) ([]domain.ProductPrice, error)
-}
+import "price-comparator-api/internal/domain"
 
-type PriceComparatorService interface {
+type PriceComparator interface {
+	FindPrices(productName string) ([]domain.ProductPrice, error)
 	Compare(productName string) ([]domain.ProductPrice, error)
 }
