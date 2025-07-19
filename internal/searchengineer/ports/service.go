@@ -4,6 +4,5 @@ package ports
 import "price-comparator-api/internal/searchengineer/domain"
 
 type PriceComparatorRepositoryImplemetation interface {
-	FindPrices(productName string) ([]domain.ProductPrice, error)
-	Compare(productName string) ([]domain.ProductPrice, error)
+	FindPrices(product domain.Product) ([]domain.ProductPrice, error)
 }

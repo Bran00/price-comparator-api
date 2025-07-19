@@ -14,6 +14,10 @@ func NewPriceComparator(repo ports.PriceComparatorRepositoryImplemetation) *Pric
 	return &PriceComparator{repo: repo}
 }
 
-func (s *PriceComparator) Compare(productName string) ([]domain.ProductPrice, error) {
-	return s.repo.FindPrices(productName)
+func (s *PriceComparator) FindPrices(productName string) ([]domain.ProductPrice, error) {
+   product := domain.Product{
+    Name: productName, 
+   }
+
+   s.FindPrices(productName string)
 }
