@@ -1,3 +1,4 @@
+// Package service has the logic of business
 package service
 
 import (
@@ -6,10 +7,10 @@ import (
 )
 
 type PriceComparator struct {
-	repo ports.PriceComparatorRepository
+	repo ports.PriceComparatorRepositoryImplemetation
 }
 
-func NewPriceComparator(repo ports.PriceComparatorRepository) *PriceComparator {
+func NewPriceComparator(repo ports.PriceComparatorRepositoryImplemetation) *PriceComparator {
 	return &PriceComparator{repo: repo}
 }
 
