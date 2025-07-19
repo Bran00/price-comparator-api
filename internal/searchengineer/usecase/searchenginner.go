@@ -19,5 +19,10 @@ func (s *PriceComparator) FindPrices(productName string) ([]domain.ProductPrice,
     Name: productName, 
    }
 
-   s.FindPrices(productName string)
+   foundProduct, err := s.repo.FindPrices(product)
+   if err != nil {
+     return nil, err
+   }
+
+   return foundProduct, nil
 }
