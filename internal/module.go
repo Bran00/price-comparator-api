@@ -1,8 +1,13 @@
-// Package internal has all logic of the application
+// Package internal contains all logic of the application.
 package internal
 
-import "go.uber.org/fx"
+import (
+	service "price-comparator-api/internal/searchengineer/usecase"
 
-var Module = fx.Module("internal",
-  fx.Provide(constructors ...interface{})
+	"go.uber.org/fx"
+)
+
+var Module = fx.Module(
+	"internal",
+	fx.Provide(service.NewPriceComparator),
 )
