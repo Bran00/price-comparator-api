@@ -1,7 +1,11 @@
 package handler
 
-import "go.uber.org/fx"
+import (
+	"price-comparator-api/adapters/api/handler/product"
+
+	"go.uber.org/fx"
+)
 
 var Module = fx.Module("handler",
-	fx.Provide(NewHTTPHandler),
+	fx.Provide(product.NewHTTPHandler),
 )

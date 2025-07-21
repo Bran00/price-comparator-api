@@ -1,10 +1,10 @@
 
-package handler
+package product
 
 import (
 	"encoding/json"
 	"net/http"
-	"price-comparator-api/internal/ports"
+	"price-comparator-api/internal/searchengineer/ports"
 )
 
 type HTTPHandler struct {

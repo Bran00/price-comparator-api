@@ -3,11 +3,11 @@ package routes
 import (
 	"net/http"
 
-	"price-comparator-api/adapters/api/handler"
+	"price-comparator-api/adapters/api/handler/product"
 	"price-comparator-api/adapters/api/health"
 )
 
-func NewMux(h *handler.HTTPHandler) *http.ServeMux {
+func NewMux(h *product.HTTPHandler) *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/compare", h.Compare)
 	health.HealthRoutes(mux)
