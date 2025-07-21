@@ -4,14 +4,14 @@ package product
 import (
 	"encoding/json"
 	"net/http"
-	"price-comparator-api/internal/searchengineer/ports"
+	service "price-comparator-api/internal/searchengineer/usecase"
 )
 
 type HTTPHandler struct {
-	service ports.PriceComparatorService
+	service service.PriceComparator
 }
 
-func NewHTTPHandler(service ports.PriceComparatorService) *HTTPHandler {
+func NewHTTPHandler(service service.PriceComparator) *HTTPHandler {
 	return &HTTPHandler{service: service}
 }
 
@@ -22,7 +22,7 @@ func (h *HTTPHandler) Compare(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	prices, err := h.service.Compare(product)
+	prices, err := h.service.FindPrices(product)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

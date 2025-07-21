@@ -3,20 +3,22 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"price-comparator-api/adapters/api/controllers"
 	"price-comparator-api/adapters/api/handler"
 	"price-comparator-api/adapters/repository"
 	"price-comparator-api/adapters/api/routes"
-	"price-comparator-api/internal/searchengineer/usecase"
+	"price-comparator-api/internal"
 
 	"go.uber.org/fx"
 )
 
 func main() {
 	fx.New(
+		controllers.Module,
 		handler.Module,
 		repository.Module,
 		routes.Module,
-		usecase.Module,
+		internal.Module,
 		fx.Invoke(StartServe),
 	).Run()
 }

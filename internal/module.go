@@ -1,4 +1,3 @@
-// Package internal contains all logic of the application.
 package internal
 
 import (
