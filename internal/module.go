@@ -1,5 +1,5 @@
+// Package internal has the logics from business
 package internal
-
 import (
 	service "price-comparator-api/internal/searchengineer/usecase"
 

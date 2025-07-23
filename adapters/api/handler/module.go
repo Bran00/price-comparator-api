@@ -1,3 +1,4 @@
+// Package handler has the handlers to controllers
 package handler
 
 import (

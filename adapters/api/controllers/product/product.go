@@ -1,3 +1,4 @@
+// Package product has the logic of business
 package product
 
 import (
