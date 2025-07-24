@@ -1,9 +1,10 @@
-
+// Package product has the connection to internal
 package product
 
 import (
 	"encoding/json"
 	"net/http"
+
 	service "price-comparator-api/internal/searchengineer/usecase"
 )
 
