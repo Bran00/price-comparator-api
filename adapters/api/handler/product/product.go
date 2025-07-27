@@ -16,7 +16,7 @@ func NewHTTPHandler(service service.PriceComparator) *HTTPHandler {
 	return &HTTPHandler{service: service}
 }
 
-func (h *HTTPHandler) Compare(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPHandler) HistoryPriceProduct(w http.ResponseWriter, r *http.Request) {
 	product := r.URL.Query().Get("product")
 	if product == "" {
 		http.Error(w, "Product parameter is missing", http.StatusBadRequest)

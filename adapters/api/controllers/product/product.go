@@ -15,6 +15,6 @@ func NewController(httpHandler *product.HTTPHandler) *Controller {
 	return &Controller{httpHandler: httpHandler}
 }
 
-func (c *Controller) Compare(w http.ResponseWriter, r *http.Request) {
+func (c *Controller) HistoryPriceProduct(w http.ResponseWriter, r *http.Request) {
 	c.httpHandler.Compare(w, r)
 }
