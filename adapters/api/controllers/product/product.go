@@ -7,7 +7,7 @@ import (
 	"price-comparator-api/adapters/api/handler/product"
 )
 
-type Controller struct {
+type ProductController struct {
 	httpHandler *product.HTTPHandler
 }
 
@@ -15,6 +15,6 @@ func NewController(httpHandler *product.HTTPHandler) *Controller {
 	return &Controller{httpHandler: httpHandler}
 }
 
-func (c *Controller) HistoryPriceProduct(w http.ResponseWriter, r *http.Request) {
+func (c *Controller) History(w http.ResponseWriter, r *http.Request) {
 	c.httpHandler.Compare(w, r)
 }
