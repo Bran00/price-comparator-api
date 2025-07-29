@@ -11,10 +11,10 @@ type PriceComparator struct {
 }
 
 func NewPriceComparator(repo ports.PriceComparatorRepositoryImplemetation) *PriceComparator {
-	return &PriceComparator{repo: repo}
+	return &PriceComparator{repo: repo} 
 }
 
-func (s *PriceComparator) FindPrices(productName string) ([]domain.ProductPrice, error) {
+func (s *PriceComparator) (productName string) ([]domain.ProductPrice, error) {
    product := domain.Product{
     Name: productName, 
    }

@@ -1,7 +1,9 @@
 package product
 
-func NewProductController(httpHandler *product.HTTPHandler) *Controller {
-	return &Controller{httpHandler: httpHandler}
+import "price-comparator-api/internal"
+
+func NewProductController(product internal.) *Controller {
+	return  
 }
 
 func (c *Controller) HistoryProduct(w http.ResponseWriter, r *http.Request) {
