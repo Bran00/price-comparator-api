@@ -1,7 +1,7 @@
 package ports
 
-import "price-comparator-api/internal/searchengineer/domain"
+import "price-comparator-api/internal/product/domain"
 
-type PriceComparatorRepositoryImplemetation interface {
-	FindPrices(product domain.Product) ([]domain.Product, error)
+type ProductHistoryRepositoryImplemetation interface {
+	ProductHistory(product string) (domain.Product, error)
 }

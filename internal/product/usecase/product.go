@@ -1,20 +1,16 @@
-// Package service has the logic of business
-package service
+package usecase
 
-import (
-	"price-comparator-api/internal/searchengineer/domain"
-	"price-comparator-api/internal/searchengineer/ports"
-)
+import "price-comparator-api/internal/product/ports"
 
-type PriceComparator struct {
-	repo ports.PriceComparatorRepositoryImplemetation
+type ProductUseCase struct {
+   repository ports.ProductHistoryRepositoryImplemetation
 }
 
-func NewPriceComparator(repo ports.PriceComparatorRepositoryImplemetation) *PriceComparator {
-	return &PriceComparator{repo: repo} 
+func NewProductUseCase(repository ports.ProductHistoryRepositoryImplemetation) *ProductUseCase {
+  return &ProductUseCase{repository}
 }
 
-func (s *PriceComparator) (productName string) ([]domain.ProductPrice, error) {
+func (s *PriceComparator) HistoryProduct(productName string) (do, error) {
    product := domain.Product{
     Name: productName, 
    }

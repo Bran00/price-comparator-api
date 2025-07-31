@@ -1,4 +1,3 @@
-// Package domain has all domains of searchenginner
 package domain
 
 type ProductPrice struct {

@@ -1,3 +1,5 @@
 package searcher
 
-type 
+type searcherServiceImpl {
+  impl  &p
+}
