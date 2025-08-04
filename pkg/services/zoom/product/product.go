@@ -48,41 +48,32 @@ func SearchByName(name string, http *http.Client) (*Suggestions, error) {
 	return &suggestions, nil
 }
 
-// GetProductIDByName busca um produto pelo nome e retorna o ID do primeiro produto encontrado.
-// Esta função reutiliza a função SearchByName e extrai o ID do primeiro produto da lista de sugestões.
-func GetProductIDByName(name string, http *http.Client) (string, error) {
-	suggestions, err := SearchByName(name, http)
+func ExtractProductIDsFromSearchPage(url string) ([]string, error) {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
+	req.Header.Set("User-Agent", "Mozilla/5.0")
 
-	if len(suggestions.Products) == 0 {
-		return "", fmt.Errorf("nenhum produto encontrado com o nome: %s", name)
-	}
-
-	return suggestions.Products[0].ID, nil
-}
-
-// GetPriceHistoryByID busca o histórico de preços de um produto pelo seu ID.
-// Esta função faz uma chamada para um endpoint hipotético da API do Zoom para obter o histórico de preços.
-func GetPriceHistoryByID(id string, http *http.Client) (*PriceHistory, error) {
-	url := fmt.Sprintf("https://api.zoom.com/v2/products/%s/history", id)
-	resp, err := http.Get(url)
+	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 
-	var history PriceHistory
-	err = json.Unmarshal(body, &history)
-	if err != nil {
-		return nil, err
-	}
+	var productIDs []string
+	doc.Find("button[data-testid='save-product']").Each(func(i int, s *goquery.Selection) {
+		if id, exists := s.Attr("id"); exists && strings.HasPrefix(id, "save-product-") {
+			productID := strings.TrimPrefix(id, "save-product-")
+			productIDs = append(productIDs, productID)
+		}
+	})
 
-	return &history, nil
+	return productIDs, nil
 }
