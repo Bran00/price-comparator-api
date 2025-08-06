@@ -5,27 +5,27 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
-// Product representa a estrutura de um produto retornado pela API do Zoom.
 type Product struct {
 	ID    string  `json:"id"`
 	Name  string  `json:"name"`
 	Price float64 `json:"price"`
 }
 
-// Suggestions representa uma lista de produtos sugeridos pela API do Zoom.
 type Suggestions struct {
 	Products []Product `json:"products"`
 }
 
-// PriceHistory representa o histórico de preços de um produto.
 type PriceHistory struct {
 	ProductID string    `json:"product_id"`
 	History   []float64 `json:"history"`
 }
 
-// SearchByName busca produtos por nome na API do Zoom.
 func SearchByName(name string, http *http.Client) (*Suggestions, error) {
 	url := fmt.Sprintf("https://api.zoom.com/v2/products/search?name=%s", name)
 	resp, err := http.Get(url)
@@ -76,4 +76,13 @@ func ExtractProductIDsFromSearchPage(url string) ([]string, error) {
 	})
 
 	return productIDs, nil
+}
+
+func SearchProductIDsByTerm(term string) ([]string, error) {
+	baseURL := "https://www.zoom.com.br/search"
+	query := url.Values{}
+	query.Set("q", term)
+
+	searchURL := fmt.Sprintf("%s?%s", baseURL, query.Encode())
+	return ExtractProductIDsFromSearchPage(searchURL)
 }
