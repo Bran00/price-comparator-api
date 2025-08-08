@@ -9,6 +9,6 @@ import (
 
 func NewMux(c *product.Controller) *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/historyprice", c.HistoryPriceProduct)
+	mux.HandleFunc("/historyprice", c.HistoryProduct)
 	return mux
 }
