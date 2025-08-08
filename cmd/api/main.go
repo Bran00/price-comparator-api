@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"price-comparator-api/adapters/api/controllers"
-	"price-comparator-api/adapters/api/handler"
-	"price-comparator-api/adapters/repository"
 	"price-comparator-api/adapters/api/routes"
 	"price-comparator-api/adapters/service"
 	"price-comparator-api/internal"
@@ -16,8 +14,6 @@ import (
 func main() {
 	fx.New(
 		controllers.Module,
-		handler.Module,
-		repository.Module,
 		routes.Module,
 		service.Module,
 		internal.Module,
