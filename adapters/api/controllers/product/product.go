@@ -1,11 +1,20 @@
 package product
 
-import "price-comparator-api/internal"
+import (
+	"net/http"
+	"price-comparator-api/internal/product/usecase"
+)
 
-func NewProductController(product internal.) *Controller {
-	return  
+type Controller struct {
+	usecase *usecase.Product
+}
+
+func NewProductController(usecase *usecase.Product) *Controller {
+	return &Controller{
+		usecase: usecase,
+	}
 }
 
 func (c *Controller) HistoryProduct(w http.ResponseWriter, r *http.Request) {
-	
+	// TODO: implement controller
 }
