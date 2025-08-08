@@ -7,6 +7,7 @@ import (
 	"price-comparator-api/adapters/api/handler"
 	"price-comparator-api/adapters/repository"
 	"price-comparator-api/adapters/api/routes"
+	"price-comparator-api/adapters/service"
 	"price-comparator-api/internal"
 
 	"go.uber.org/fx"
@@ -18,6 +19,7 @@ func main() {
 		handler.Module,
 		repository.Module,
 		routes.Module,
+		service.Module,
 		internal.Module,
 		fx.Invoke(StartServe),
 	).Run()
