@@ -7,5 +7,5 @@ import (
 )
 
 var Module = fx.Module("controllers",
-	fx.Provide(product.NewController),
+	fx.Provide(product.NewProductController),
 )
