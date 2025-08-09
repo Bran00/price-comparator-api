@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"price-comparator-api/adapters/api/controllers/product"
 	"price-comparator-api/internal/product/domain"
 	"price-comparator-api/internal/product/ports"
 )
@@ -17,4 +18,8 @@ func NewProductUsecase(repository ports.ProductHistoryRepositoryImplemetation) *
 
 func (p *Product) ProductHistory(product string) (domain.Product, error) {
 	return p.repository.ProductHistory(product)
+}
+
+func (p *Product) SuggestionOfProduct(name string) (domain.Product, error) {
+  return p.repository.SuggestionOfProduct(name)
 }
