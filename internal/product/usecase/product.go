@@ -20,6 +20,6 @@ func (p *Product) ProductHistory(product string) (domain.Product, error) {
 	return p.repository.ProductHistory(product)
 }
 
-func (p *Product) SuggestionOfProduct(name string) (domain.Product, error) {
+func (p *Product) SuggestionOfProduct(name string) (domain.Suggestions, error) {
   return p.repository.SuggestionOfProduct(name)
 }

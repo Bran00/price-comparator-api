@@ -26,6 +26,52 @@ type PriceHistory struct {
 	History   []float64 `json:"history"`
 }
 
+type SuggestionRequest struct {
+	Pagination              PaginationRequest `json:"pagination"`
+	Query                   string            `json:"query"`
+	Order                   string            `json:"order"`
+	DisableRefinementsStats bool              `json:"disableRefinementsStats"`
+	EnableCategorySuggestion bool             `json:"enableCategorySuggestion"`
+	Refinements             []interface{}     `json:"refinements"`
+}
+
+type PaginationRequest struct {
+	HitsPerPage int `json:"hitsPerPage"`
+	Page        int `json:"page"`
+}
+
+type SuggestionResponse struct {
+	Query      string             `json:"query"`
+	Index      string             `json:"index"`
+	Pagination PaginationResponse `json:"pagination"`
+	Hits       []Hit              `json:"hits"`
+	IsIndexable bool              `json:"isIndexable"`
+}
+
+type PaginationResponse struct {
+	Page        int `json:"page"`
+	HitsPerPage int `json:"hitsPerPage"`
+	NbHits      int `json:"nbHits"`
+	NbPages     int `json:"nbPages"`
+}
+
+type Hit struct {
+	ObjectID          string             `json:"objectID"`
+	Position          int                `json:"position"`
+	Query             string             `json:"query"`
+	CategorySuggestion CategorySuggestion `json:"categorySuggestion"`
+}
+
+type CategorySuggestion struct {
+	BestOption Option   `json:"bestOption"`
+	AllOptions []Option `json:"allOptions"`
+}
+
+type Option struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
 func SearchByName(name string, http *http.Client) (*Suggestions, error) {
 	url := fmt.Sprintf("https://api.zoom.com/v2/products/search?name=%s", name)
 	resp, err := http.Get(url)
@@ -85,52 +131,6 @@ func SearchProductIDsByTerm(term string) ([]string, error) {
 
 	searchURL := fmt.Sprintf("%s?%s", baseURL, query.Encode())
 	return ExtractProductIDsFromSearchPage(searchURL)
-}
-
-type SuggestionRequest struct {
-	Pagination              PaginationRequest `json:"pagination"`
-	Query                   string            `json:"query"`
-	Order                   string            `json:"order"`
-	DisableRefinementsStats bool              `json:"disableRefinementsStats"`
-	EnableCategorySuggestion bool             `json:"enableCategorySuggestion"`
-	Refinements             []interface{}     `json:"refinements"`
-}
-
-type PaginationRequest struct {
-	HitsPerPage int `json:"hitsPerPage"`
-	Page        int `json:"page"`
-}
-
-type SuggestionResponse struct {
-	Query      string             `json:"query"`
-	Index      string             `json:"index"`
-	Pagination PaginationResponse `json:"pagination"`
-	Hits       []Hit              `json:"hits"`
-	IsIndexable bool              `json:"isIndexable"`
-}
-
-type PaginationResponse struct {
-	Page        int `json:"page"`
-	HitsPerPage int `json:"hitsPerPage"`
-	NbHits      int `json:"nbHits"`
-	NbPages     int `json:"nbPages"`
-}
-
-type Hit struct {
-	ObjectID          string             `json:"objectID"`
-	Position          int                `json:"position"`
-	Query             string             `json:"query"`
-	CategorySuggestion CategorySuggestion `json:"categorySuggestion"`
-}
-
-type CategorySuggestion struct {
-	BestOption Option   `json:"bestOption"`
-	AllOptions []Option `json:"allOptions"`
-}
-
-type Option struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
 }
 
 func SuggestionsOfProducts(product string, client *http.Client) (*SuggestionResponse, error) {
