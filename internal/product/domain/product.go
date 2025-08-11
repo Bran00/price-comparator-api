@@ -10,3 +10,7 @@ type ProductPrice struct {
 type Product struct {
 	Name string
 }
+
+type Suggestions struct {
+	Products string `json:"products"`
+}
