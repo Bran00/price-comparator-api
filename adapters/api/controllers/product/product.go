@@ -18,3 +18,7 @@ func NewProductController(usecase *usecase.Product) *Controller {
 func (c *Controller) HistoryProduct(w http.ResponseWriter, r *http.Request) {
 	// TODO: implement controller
 }
+
+func (c *Controller) SuggestionOfProducts(w http.ResponseWriter, r *http.Request) {
+	// TODO: implement controller
+}
