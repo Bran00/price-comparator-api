@@ -23,13 +23,13 @@ func (c *Controller) HistoryProduct(w http.ResponseWriter, r *http.Request) {
 func (c *Controller) SuggestionOfProducts(w http.ResponseWriter, r *http.Request) {
 	product := r.URL.Query().Get("product")
 	if product == "" {
-		w http.Error("product is required", http.StatusBadRequest)
+    http.Error(w, "product is required", http.StatusBadRequest)
 		return
 	}
 
 	suggestions, err := c.usecase.SuggestionOfProduct(product)
 	if err != nil {
-		w http.Error(err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 

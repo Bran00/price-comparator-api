@@ -1,7 +1,6 @@
 package usecase
 
 import (
-	"price-comparator-api/adapters/api/controllers/product"
 	"price-comparator-api/internal/product/domain"
 	"price-comparator-api/internal/product/ports"
 )
