@@ -4,20 +4,20 @@ import (
 	"net/http"
 	"price-comparator-api/internal/product/domain"
 	"price-comparator-api/internal/product/ports"
-	zoom "price-comparator-api/pkg/services/zoom/product"
+	"price-comparator-api/pkg/services/zoom/product"
 )
 
-type Service struct {
-	client *http.Client
+type SearcherServiceImpl struct {
+	httpClient *http.Client
 }
 
 func NewSearcherService() ports.ProductHistoryRepositoryImplemetation {
-	return &Service{
-		client: &http.Client{},
-	}
+  return &SearcherServiceImpl{
+    httpClient: http.DefaultClient,
+  }
 }
 
-func (s *Service) ProductHistory(product string) (domain.Product, error) {
+func (s *SearcherServiceImpl) ProductHistory(product string) (domain.Product, error) {
 	// TODO: implement searcher
 	return domain.Product{}, nil
 }
