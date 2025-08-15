@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"price-comparator-api/internal/product/domain"
 	"price-comparator-api/internal/product/ports"
-	"price-comparator-api/pkg/services/zoom/product"
+	zoom "price-comparator-api/pkg/services/zoom/product"
 )
 
 type SearcherServiceImpl struct {
@@ -22,8 +22,8 @@ func (s *SearcherServiceImpl) ProductHistory(product string) (domain.Product, er
 	return domain.Product{}, nil
 }
 
-func (s *Service) SuggestionOfProduct(product string) (domain.Suggestions, error) {
-	suggestions, err := zoom.SuggestionsOfProducts(product, s.client)
+func (s *SearcherServiceImpl) SuggestionOfProduct(product string) (domain.Suggestions, error) {
+	suggestions, err := zoom.SuggestionsOfProducts(product, s.httpClient)
 	if err != nil {
 		return domain.Suggestions{}, err
 	}
