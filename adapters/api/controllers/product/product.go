@@ -1,20 +1,22 @@
 package controllers
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"price-comparator-api/internal/product/usecase"
+
+	"github.com/gin-gonic/gin"
 )
 
 type ProductController struct {
-	
-  usecase *usecase.Product
+	client            *http.Client
+  usecaseProduct    *usecase.Product
 }
 
 func NewProductController(usecase *usecase.Product) *ProductController {
 	return &ProductController{
-		usecase: usecase,
+    client:         http.DefaultClient,
+		usecaseProduct: usecase,
 	}
 }
 
@@ -22,19 +24,7 @@ func (c *ProductController) HistoryProduct(w http.ResponseWriter, r *http.Reques
 	// TODO: implement controller
 }
 
-func (c *ProductController) SuggestionOfProducts(w http.ResponseWriter, r *http.Request) {
-	product := r.URL.Query().Get("product")
-	if product == "" {
-		http.Error(w, "product is required", http.StatusBadRequest)
-		return
-	}
-
-	suggestions, err := c.usecase.SuggestionOfProduct(product)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(suggestions)
+func (c *ProductController) SuggestionOfProducts(ctx *gin.Context) {
+  var isoReq request.RequestIsochroneParams
+	err := validate.BindQuery(ctx.Request.URL.Query(), &isoReq) 
 }
