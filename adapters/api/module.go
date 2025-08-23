@@ -12,9 +12,9 @@ import (
 
 var Module = fx.Module("api", 
   fx.Provide(
-
+      ginEngineProvider,
   ),
-  fx.Invoke(),
+  fx.Invoke(startServer),
 )
 
 func startServer(lc fx.Lifecycle, router *gin.Engine) {
@@ -35,5 +35,14 @@ func startServer(lc fx.Lifecycle, router *gin.Engine) {
       log.Println("application running in server 5000!")
       return nil
     },
+    OnStop: func(ctx context.Context) error {
+      return server.Shutdown(ctx)
+    },
   })
+}
+
+func ginEngineProvider() *gin.Engine {
+  app := gin.New()
+
+  return app
 }
