@@ -8,7 +8,8 @@ import (
 )
 
 type ProductController struct {
-	usecase *usecase.Product
+	
+  usecase *usecase.Product
 }
 
 func NewProductController(usecase *usecase.Product) *ProductController {
