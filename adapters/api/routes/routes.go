@@ -1,15 +1,13 @@
-//Package routes has the routes to api
+// Package routes has the routes to api
 package routes
 
 import (
 	"net/http"
+	controllers "price-comparator-api/adapters/api/controllers/product"
 
-	"price-comparator-api/adapters/api/controllers/product"
+	"github.com/gin-gonic/gin"
 )
 
-func RegisterRoutes(c *product.Controller) *http.ServeMux {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/historyprice", c.HistoryProduct)
-	mux.HandleFunc("/suggestionOfProducts", c.SuggestionOfProducts)
-	return mux
+func RegisterRoutes(app *gin.Engine, crtl *controllers.ProductController) {
+  
 }

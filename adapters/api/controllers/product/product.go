@@ -1,29 +1,30 @@
-package product
+package controllers
 
 import (
 	"encoding/json"
 	"net/http"
+
 	"price-comparator-api/internal/product/usecase"
 )
 
-type Controller struct {
+type ProductController struct {
 	usecase *usecase.Product
 }
 
-func NewProductController(usecase *usecase.Product) *Controller {
-	return &Controller{
+func NewProductController(usecase *usecase.Product) *ProductController {
+	return &ProductController{
 		usecase: usecase,
 	}
 }
 
-func (c *Controller) HistoryProduct(w http.ResponseWriter, r *http.Request) {
+func (c *ProductController) HistoryProduct(w http.ResponseWriter, r *http.Request) {
 	// TODO: implement controller
 }
 
-func (c *Controller) SuggestionOfProducts(w http.ResponseWriter, r *http.Request) {
+func (c *ProductController) SuggestionOfProducts(w http.ResponseWriter, r *http.Request) {
 	product := r.URL.Query().Get("product")
 	if product == "" {
-    http.Error(w, "product is required", http.StatusBadRequest)
+		http.Error(w, "product is required", http.StatusBadRequest)
 		return
 	}
 
