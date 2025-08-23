@@ -7,7 +7,7 @@ import (
 	"price-comparator-api/adapters/api/controllers/product"
 )
 
-func NewMux(c *product.Controller) *http.ServeMux {
+func RegisterRoutes(c *product.Controller) *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/historyprice", c.HistoryProduct)
 	mux.HandleFunc("/suggestionOfProducts", c.SuggestionOfProducts)

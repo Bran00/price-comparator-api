@@ -17,11 +17,5 @@ func main() {
 		routes.Module,
 		service.Module,
 		internal.Module,
-		fx.Invoke(StartServe),
 	).Run()
-}
-
-func StartServe(mux *http.ServeMux) {
-	fmt.Println("Server is running on port 8080")
-	http.ListenAndServe(":8080", mux)
 }
