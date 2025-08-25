@@ -19,7 +19,7 @@ var Module = fx.Module("api",
 
 func startServer(lc fx.Lifecycle, router *gin.Engine) {
   server := &http.Server{
-    Addr: fmt.Sprintf(":%s", 5000),
+    Addr: fmt.Sprintf(":%d", 5000),
     Handler: router,
   }
 
