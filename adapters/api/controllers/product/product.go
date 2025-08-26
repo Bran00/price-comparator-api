@@ -28,10 +28,16 @@ func (c *ProductController) HistoryProduct(w http.ResponseWriter, r *http.Reques
 func (c *ProductController) SuggestionOfProducts(ctx *gin.Context) {
   var isoReq request.RequestProductParams
 
-  if err := ctx.ShouldBindJSON(&isoReq); err != nil {
+  if err := ctx.ShouldBindQuery(&isoReq); err != nil {
         ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
   }
 
-  ctx.JSON(http.StatusOK, gin.H{"message": "Dados recebidos com sucesso"})
+	suggestions, err := c.usecaseProduct.SuggestionOfProduct(isoReq.Name)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+  ctx.JSON(http.StatusOK, suggestions)
 }

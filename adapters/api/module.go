@@ -6,6 +6,9 @@ import (
 	"log"
 	"net/http"
 
+	controllers "price-comparator-api/adapters/api/controllers/product"
+	"price-comparator-api/adapters/api/routes"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/fx"
 )
@@ -13,7 +16,9 @@ import (
 var Module = fx.Module("api", 
   fx.Provide(
       ginEngineProvider,
+      controllers.NewProductController,
   ),
+  fx.Invoke(routes.RegisterRoutes),
   fx.Invoke(startServer),
 )
 
