@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"log"
 	"net/http"
 
 	"price-comparator-api/adapters/transport/request"
@@ -34,9 +33,6 @@ func (c *ProductController) SuggestionOfProducts(ctx *gin.Context) {
         return
   }
 
-  log.Println(isoReq)
-
-  //TODO: tem que verificar como ta chegando o valor aqui
 	suggestions, err := c.usecaseProduct.SuggestionOfProduct(isoReq.Name)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
