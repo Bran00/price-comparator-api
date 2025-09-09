@@ -9,4 +9,5 @@ import (
 func RegisterRoutes(app *gin.Engine, crtl *controllers.ProductController) {
   getProductRouter := app.Group("api/v1")
   getProductRouter.GET("/getSuggestionOfProducts", crtl.SuggestionOfProducts)
+  getProductRouter.GET("/getProduct", crtl.GetProductsNearest)
 }

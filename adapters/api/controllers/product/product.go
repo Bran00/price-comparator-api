@@ -42,6 +42,7 @@ func (c *ProductController) SuggestionOfProducts(ctx *gin.Context) {
   ctx.JSON(http.StatusOK, suggestions)
 }
 
-func (c *ProductController) GetProductsNearest() {
-
+func (c *ProductController) GetProductsNearest(ctx *gin.Context) {
+  var isoReq request.RequestProductParams
+  
 }
