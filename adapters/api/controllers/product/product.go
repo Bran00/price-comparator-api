@@ -44,5 +44,9 @@ func (c *ProductController) SuggestionOfProducts(ctx *gin.Context) {
 
 func (c *ProductController) GetProductsNearest(ctx *gin.Context) {
   var isoReq request.RequestProductParams
-  
+
+  if err := ctx.ShouldBindQuery(&isoReq); err != nil {
+    ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+    return
+  }
 }
